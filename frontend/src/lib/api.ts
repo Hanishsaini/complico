@@ -56,6 +56,23 @@ api.interceptors.response.use(
   }
 );
 
+/** Pull a human-readable string out of an axios error.
+ *  Handles FastAPI's 422 shape where `detail` is an array of validation errors. */
+export function extractErrorMessage(err: any, fallback = "Something went wrong"): string {
+  const d = err?.response?.data?.detail;
+  if (typeof d === "string") return d;
+  if (Array.isArray(d)) {
+    return d
+      .map((e: any) => {
+        const field = Array.isArray(e?.loc) ? e.loc.filter((x: any) => x !== "body").join(".") : "";
+        return field ? `${field}: ${e?.msg || "invalid"}` : (e?.msg || "invalid");
+      })
+      .join(" • ");
+  }
+  if (err?.message) return err.message;
+  return fallback;
+}
+
 export const authApi = {
   login: async (creds: LoginCredentials): Promise<AuthResponse> =>
     (await api.post("/auth/login", creds)).data,

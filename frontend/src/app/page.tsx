@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { authApi } from "@/lib/api";
+import { authApi, extractErrorMessage } from "@/lib/api";
 import { Button } from "@/components/ui/Button";
 import { Shield } from "lucide-react";
 import toast from "react-hot-toast";
@@ -37,7 +37,7 @@ export default function AuthPage() {
       }
       router.push("/dashboard");
     } catch (err: any) {
-      toast.error(err.response?.data?.detail || `${mode === "login" ? "Login" : "Registration"} failed`);
+      toast.error(extractErrorMessage(err, `${mode === "login" ? "Login" : "Registration"} failed`));
     } finally {
       setLoading(false);
     }

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Finding } from "@/types";
-import { ChevronDown, FileText, Lightbulb, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { ChevronDown, FileText, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { PolicyModal } from "./PolicyModal";
 import { DocumentViewer } from "./DocumentViewer";
 
@@ -87,7 +87,7 @@ export const FindingCard = ({ finding, index, fullText }: Props) => {
                 )}
 
                 {finding.recommendation && (
-                  <div className="bg-emerald-500/[0.04] rounded-xl p-4 border border-emerald-500/10">
+                  <div className="bg-emerald-500/4 rounded-xl p-4 border border-emerald-500/10">
                     <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-2">Recommendation</p>
                     <p className="text-sm text-[#edf0f5] leading-relaxed">{finding.recommendation}</p>
                     {finding.action_steps && finding.action_steps.length > 0 && (

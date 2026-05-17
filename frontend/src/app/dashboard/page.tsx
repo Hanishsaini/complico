@@ -2,7 +2,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { auditApi } from "@/lib/api";
+import { auditApi, extractErrorMessage } from "@/lib/api";
 import { SOC2_CONTROLS, ISO27001_CONTROLS } from "@/lib/constants";
 import { Finding } from "@/types";
 import { Button } from "@/components/ui/Button";
@@ -56,7 +56,7 @@ export default function DashboardPage() {
       setUploadId(r.upload_id);
       toast.success(`Uploaded: ${r.original_name}`);
     } catch (e: any) {
-      toast.error(e.response?.data?.detail || "Upload failed");
+      toast.error(extractErrorMessage(e, "Upload failed"));
     } finally {
       setUploading(false);
     }
@@ -76,7 +76,7 @@ export default function DashboardPage() {
       const r = await auditApi.runAudit(selected, framework, uploadId || undefined);
       setFindings(r.findings); setTraceId(r.trace_id); setFullText(r.full_text || ""); setShowResults(true);
       toast.success("Audit complete");
-    } catch (e: any) { toast.error(e.response?.data?.detail || "Audit failed"); }
+    } catch (e: any) { toast.error(extractErrorMessage(e, "Audit failed")); }
     finally { setAnalyzing(false); }
   };
 
@@ -100,7 +100,7 @@ export default function DashboardPage() {
       }));
       setFindings(mapped); setTraceId(data.trace_id); setFullText(""); setShowResults(true);
       toast.success("Enterprise audit complete");
-    } catch (e: any) { toast.error(e.response?.data?.detail || "Audit failed"); }
+    } catch (e: any) { toast.error(extractErrorMessage(e, "Audit failed")); }
     finally { setAnalyzing(false); }
   };
 
@@ -115,7 +115,7 @@ export default function DashboardPage() {
       const r = await auditApi.runAudit(ids, framework, up.upload_id);
       setFindings(r.findings); setTraceId(r.trace_id); setFullText(r.full_text || "");
       setShowResults(true); toast.success("Demo complete");
-    } catch (e: any) { toast.error(e.response?.data?.detail || "Demo failed"); }
+    } catch (e: any) { toast.error(extractErrorMessage(e, "Demo failed")); }
     finally { setAnalyzing(false); }
   };
 
@@ -133,7 +133,7 @@ export default function DashboardPage() {
       zip.file("README.txt", `Compliance Pack for ${name}\nGenerated: ${new Date().toLocaleString()}\nTrace: ${traceId}`);
       saveAs(await zip.generateAsync({ type: "blob" }), `${name}_compliance_pack.zip`);
       toast.success(`Generated ${data.policies.length} policies`);
-    } catch (e: any) { toast.error(e.message); }
+    } catch (e: any) { toast.error(extractErrorMessage(e, "Failed to generate pack")); }
     finally { setGenPack(false); }
   };
 
@@ -177,12 +177,12 @@ export default function DashboardPage() {
         <div className="absolute inset-0 bg-hero-glow pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-24 text-center relative">
           <motion.div initial={{ y: 12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.05 }}>
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/[0.04] px-4 py-1.5 text-xs font-semibold text-emerald-400 mb-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/4 px-4 py-1.5 text-xs font-semibold text-emerald-400 mb-6">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> {framework} Readiness Platform
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white">
               AI Compliance{" "}
-              <span className="bg-gradient-to-r from-emerald-400 to-emerald-300 bg-clip-text text-transparent">Copilot</span>
+              <span className="bg-linear-to-r from-emerald-400 to-emerald-300 bg-clip-text text-transparent">Copilot</span>
             </h1>
             <p className="mt-4 text-lg text-[#8b949e] max-w-xl mx-auto text-balance">
               Upload your {framework} report. Find gaps instantly. Generate audit-ready policies in minutes, not months.
