@@ -1,0 +1,40 @@
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+
+export const SOC2_CONTROLS = [
+  { id: "CC1.1", name: "Integrity and Ethical Values", description: "Demonstrates commitment to integrity and ethical values" },
+  { id: "CC1.2", name: "Board Independence", description: "Board independence from management and oversight" },
+  { id: "CC6.1", name: "Logical Access Security", description: "Logical access to systems and data is restricted" },
+  { id: "CC6.2", name: "User Access Provisioning", description: "Process for granting and revoking user access" },
+  { id: "CC6.3", name: "Security Awareness", description: "Personnel are provided security awareness training" },
+  { id: "CC7.1", name: "Change Management", description: "Changes to systems are authorized and tested" },
+  { id: "CC7.2", name: "Risk Assessment", description: "Risks are identified and assessed" },
+  { id: "CC8.1", name: "Vendor Risk Management", description: "Third-party vendors are evaluated for risk" },
+];
+
+export const ISO27001_CONTROLS = [
+  { id: "A.5.1.1", name: "Policies for Information Security", description: "Information security policies shall be defined, approved, published and communicated." },
+  { id: "A.5.1.2", name: "Review of the Policies for Information Security", description: "Policies shall be reviewed at planned intervals." },
+  { id: "A.6.1.1", name: "Information Security Roles and Responsibilities", description: "All information security responsibilities shall be defined and allocated." },
+  { id: "A.6.1.2", name: "Segregation of Duties", description: "Conflicting duties shall be segregated." },
+  { id: "A.7.2.1", name: "Management Responsibilities", description: "Management shall require employees to apply information security." },
+  { id: "A.7.2.2", name: "Information Security Awareness, Education and Training", description: "All employees shall receive appropriate awareness education and training." },
+  { id: "A.8.1.1", name: "Inventory of Assets", description: "All assets shall be clearly identified and an inventory maintained." },
+  { id: "A.8.1.2", name: "Ownership of Assets", description: "Assets shall have an owner." },
+  { id: "A.8.2.1", name: "Classification of Information", description: "Information shall be classified." },
+  { id: "A.9.1.1", name: "Access Control Policy", description: "An access control policy shall be established." },
+  { id: "A.9.2.1", name: "User Registration and De-registration", description: "A formal user registration and de-registration process shall be implemented." },
+  { id: "A.9.2.2", name: "User Access Provisioning", description: "A formal user access provisioning process shall be implemented." },
+  { id: "A.9.2.3", name: "Management of Privileged Access Rights", description: "Privileged access rights shall be restricted and controlled." },
+  { id: "A.9.4.1", name: "Information Access Restriction", description: "Access to information shall be restricted." },
+  { id: "A.10.1.1", name: "Policy on the Use of Cryptographic Controls", description: "A policy on the use of cryptographic controls shall be developed." },
+  { id: "A.11.1.1", name: "Physical Security Perimeter", description: "Security perimeters shall be defined and used." },
+  { id: "A.12.1.1", name: "Documented Operating Procedures", description: "Operating procedures shall be documented." },
+  { id: "A.12.1.2", name: "Change Management", description: "Changes that affect information security shall be controlled." },
+  { id: "A.12.6.1", name: "Management of Technical Vulnerabilities", description: "Technical vulnerabilities shall be managed." },
+  { id: "A.13.1.1", name: "Network Controls", description: "Networks shall be managed and controlled." },
+  { id: "A.14.2.1", name: "Secure Development Policy", description: "Rules for secure development shall be established." },
+  { id: "A.15.1.1", name: "Information Security Policy for Supplier Relationships", description: "Information security requirements for suppliers shall be agreed." },
+  { id: "A.16.1.1", name: "Responsibilities and Procedures", description: "Incident response responsibilities and procedures shall be established." },
+  { id: "A.17.1.1", name: "Planning Information Security Continuity", description: "Information security continuity shall be planned." },
+  { id: "A.18.1.1", name: "Identification of Applicable Legislation and Contractual Requirements", description: "Legislative and regulatory requirements shall be identified." },
+];

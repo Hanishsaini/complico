@@ -1,0 +1,57 @@
+# ---------- Secrets & local config ----------
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.egg-info/
+dist/
+build/
+
+# ---------- Backend data (user uploads, DB, vector index) ----------
+backend/data/audit.db
+backend/data/audit.db-journal
+backend/data/uploads/
+backend/data/vector.index
+backend/data/vector_meta.pkl
+backend/data/*.pkl
+
+# ---------- Node / Next.js ----------
+node_modules/
+.next/
+out/
+.turbo/
+*.tsbuildinfo
+next-env.d.ts
+
+# ---------- Logs ----------
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---------- OS / Editor ----------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
